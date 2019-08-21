@@ -43,12 +43,12 @@ _relevant when dealing with real data_
 
 # To-Dos:
 
--[] Implement thinning algorithm (J)
--[] Review thinning algorithm (J+K)
--[] Write description of the problem (K)
--[] Generate synthetic but realistic data sets to determine upper limits (K)
--[] Implement cluster detection in sets of thinned events (K)
--[] Describe mathematical foundations for Poisson process stacking and thinning 
+- [] Implement thinning algorithm (J)
+- [] Review thinning algorithm (J+K)
+- [] Write description of the problem (K)
+- [] Generate synthetic but realistic data sets to determine upper limits (K)
+- [] Implement cluster detection in sets of thinned events (K)
+- [] Describe mathematical foundations for Poisson process stacking and thinning 
 
 
 
