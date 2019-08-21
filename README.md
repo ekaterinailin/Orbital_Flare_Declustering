@@ -1,4 +1,5 @@
-# Orbital phase flare de-clustering in close-in star-planet systems
+# Flaring star-planet interactions
+## Orbital phase flare de-clustering in close-in star-planet systems
 
 ## Abstract
 
