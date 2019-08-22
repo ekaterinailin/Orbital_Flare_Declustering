@@ -47,8 +47,11 @@ _relevant when dealing with real data_
 
 ### Thinning
 
+Thinning is a probabilistic tool to recover a sample of some underlying point process from a set of measurements. Classically, Thinning is used in the context of earthquake research ([van Stiphout, T., J. Zhuang, and D. Marsan 2012](http://www.corssa.org/export/sites/corssa/.galleries/articles-pdf/vanStiphout_et_al.pdf)). Data in this field consists of catalogues containing all earthquake events within a timeframe. Since not all earthquakes are triggered due to a region's seismicity but most are aftershocks, which cluster around the mainshocks. To estimate background intensity of the main shocks the data has to be declustered, removing the the aftershocks in the process ([Zhuang, Ogata, Vere-Jones 2002] (https://doi.org/10.1198/016214502760046925)). In this case, the sample recovered by Thinning consists of the most probable mainshocks.
+In particular, under the assumption that the underlying point process is Poisson, theory exists for Thinning to be applicable in a consistent way ([Vere-Jones 1970] (https://www.jstor.org/stable/2984402)). 
 
-_For the thinning we iterate through a range of $\lambda \geq \lambda_0$. For a very high $\lambda$ flares will be rejected uniformly from the sample because we falsely assume a lower flare occurrence rate than we observe. As we approach $\lambda_0$ instrinsic flares will be kept, and flares that occur too often in a certain phase period will be rejected. If we find a cluster of such flares emerge as we approach $\lambda_0$ from below we can identify likely SPI flares.
+We extend the methodoly to flare occurences in star-planet interactions by identifying mainshocks with intrinsic flares and aftershocks with SPI flares. In contrast to earthquakes, there is no causal structure between intrinsic flares and SPI flares. Nonetheless, the mathematical framework allows for an application lacking the causal structure. We use a variation of the ETAS model ([Ogata 1999] (https://link.springer.com/chapter/10.1007/978-3-0348-8677-2_14)). We propose a combination of a homogenous Poisson process for the intrinsic flares combined with an inhomogeonous Poisson process for the SPI flares. The full model is, hence, an inhomogenous Poisson process. Thinning is than applied to the data based on this process.
+
 
 ## Analysis of results
 
