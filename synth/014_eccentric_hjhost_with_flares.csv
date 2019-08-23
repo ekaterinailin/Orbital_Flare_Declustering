@@ -1,0 +1,27 @@
+#
+# Hot Jupiter host, period [d]
+25.36537301849282
+#
+# Hot Jupiter host, T(first periastron)
+1.0962072235555367
+#
+# Intrinsic flare time series, lambda(Poisson) [d^-1]
+0.0009682209995686896
+#
+# Intrinsic flare time series, start [d], finish [d]
+0.0,10.032658971761153
+peak_time,source
+0.07291681262787576,intrinsic
+0.34444513393739407,intrinsic
+0.6694457845073546,intrinsic
+1.0020853392573783,intrinsic
+2.4250048542527822,intrinsic
+2.6993109589005053,intrinsic
+2.7277832381171048,intrinsic
+3.5402848645420057,intrinsic
+6.715985665944633,intrinsic
+7.411820392164933,intrinsic
+7.607654117508371,intrinsic
+8.38960012721302,intrinsic
+8.636128398478695,intrinsic
+9.539602429229802,intrinsic
