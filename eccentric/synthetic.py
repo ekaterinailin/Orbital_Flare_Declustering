@@ -195,13 +195,13 @@ class SyntheticFlares(object):
             readcontent = file.read()  # store the read value of exe.txt into
                                         # readcontent
             file.seek(0, 0) #Takes the cursor to top line
-            header1 = ("#\n# Hot Jupiter host, period [d]\n{}\n"
-                       "#\n# Hot Jupiter host, T(first periastron)\n{}"
+            header1 = ("#\n# Hot Jupiter host, period [d]\n,{}\n"
+                       "#\n# Hot Jupiter host, T(first periastron)\n,{}"
                        .format(self.hjhost.period, self.hjhost.first_periastron_time))
-            header2 = ("#\n# Intrinsic flare time series, lambda(Poisson) [d^-1]\n{}\n"
-                       "#\n# Intrinsic flare time series, start [d], finish [d]\n{},{}"
-                       .format(self.poisson_parameter, self.observation_time[0],
-                               self.observation_time[-1]))
+            header2 = ("#\n# Intrinsic flare time series, lambda(Poisson) [d^-1]\n,{}\n"
+                       "#\n# Intrinsic flare time series, start [d], finish [d], cadence [h^-1]\n,{},{},{}"
+                       .format(self.flares_per_day, self.observation_time[0],
+                               self.observation_time[-1], self.cadence))
             headers = [header1, header2]
             for header in headers:
                 file.write(header + "\n") #convert int to str since write() deals
