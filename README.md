@@ -27,7 +27,7 @@ Our goal is to find SPI flares in stacked and scaled light curves of transiting 
 
 ### Assumptions about the data
 
-1. The intrinsic flare production process is a Poisson process with a characteristic time scale that depends on the individual flaring activity of the star
+1. The intrinsic flare production process is a Poisson process with a characteristic time scale that depends on the individual flaring activity of the star (source!)
 2. Assuming 1. we can also assume periodic boundary conditions that allows us to search for clusters of flares during secondary eclipse.
 3. The characteristic time scale for each light curve does not change in the period of observation.
 4. The overdensity of flares occurs at similar orbital phases for all star-planet systems.
@@ -38,19 +38,20 @@ Our goal is to find SPI flares in stacked and scaled light curves of transiting 
 
 Light curves with transits have different orbital periods, and typically multiple transits occur in a single light curve for a confirmed exoplanet. We phase-fold all available light curves and stack them. The resulting time dependence of flare occurrences remains a Poisson process with a different characteristic time scale $\lambda$ from the individual light curves.
 
+### Thinning
+
+Thinning is a probabilistic tool to recover a sample of some underlying point process from a set of measurements. Classically, Thinning is used in the context of earthquake research ([van Stiphout, T., J. Zhuang, and D. Marsan 2012](http://www.corssa.org/export/sites/corssa/.galleries/articles-pdf/vanStiphout_et_al.pdf)). Data in this field consists of catalogues containing all earthquake events within a timeframe. Since not all earthquakes are triggered due to a region's seismicity but most are aftershocks, which cluster around the mainshocks, finding the mainshocks is statisically demanding. To estimate the background intensity of the mainshocks the data has to be declustered, removing the the aftershocks in the process ([Zhuang, Ogata, Vere-Jones 2002] (https://doi.org/10.1198/016214502760046925)). One way of declustering is stochastic declustering or Thinning ([van Stiphout, T., J. Zhuang, and D. Marsan 2012](http://www.corssa.org/export/sites/corssa/.galleries/articles-pdf/vanStiphout_et_al.pdf)). using this method, the sample recovered by Thinning consists of the most probable mainshocks given that they are distributed according to a homogenous Poisson process.
+In particular, under the assumption that the underlying point process is Poisson, theory exists for Thinning to be applicable in a consistent way ([Vere-Jones 1970] (https://www.jstor.org/stable/2984402)). 
+
+We extend the methodoly to flare occurences in star-planet interactions by identifying mainshocks with intrinsic flares and aftershocks with SPI flares. In contrast to earthquakes, there is no causal structure between intrinsic flares and SPI flares. Nonetheless, the mathematical framework allows for an application lacking the causal structure. We use a variation of the ETAS model ([Ogata 1999] (https://link.springer.com/chapter/10.1007/978-3-0348-8677-2_14)) proposing a combination of a homogenous Poisson process for the intrinsic flares combined with an inhomogeonous Poisson process for the SPI flares. The full model is, hence, an inhomogenous Poisson process with intensity $\lambda(\phi) = \mu + \psi(\phi)$ where $\mu > 0$ is the intrinsic flare rate and $\psi$ a periodic function capturing the SPI flare rate. Thinning is than applied to the data based on this process.
+
 
 ### Poisson process fitting
 
-We fit an initial value $\lambda_0$ which will be somewhat too low if SPI flare are contaminating the sample.
+We fit an inhomogenous Poisson process to the data by using maximum likelihood estimation for the intensity $\lambda$ (see e.g. ([Vere-Jones 1970] (https://www.jstor.org/stable/2984402)) ). The estimated value $\hat{\mu}$ for $\mu$ is then an estimator for the intrinsic flare rate. To make this work, we assume a parametric form of $\psi$ being linked to the distance between planet and star. 
+
 
 _relevant when dealing with real data_
-
-### Thinning
-
-Thinning is a probabilistic tool to recover a sample of some underlying point process from a set of measurements. Classically, Thinning is used in the context of earthquake research ([van Stiphout, T., J. Zhuang, and D. Marsan 2012](http://www.corssa.org/export/sites/corssa/.galleries/articles-pdf/vanStiphout_et_al.pdf)). Data in this field consists of catalogues containing all earthquake events within a timeframe. Since not all earthquakes are triggered due to a region's seismicity but most are aftershocks, which cluster around the mainshocks. To estimate background intensity of the main shocks the data has to be declustered, removing the the aftershocks in the process ([Zhuang, Ogata, Vere-Jones 2002] (https://doi.org/10.1198/016214502760046925)). In this case, the sample recovered by Thinning consists of the most probable mainshocks.
-In particular, under the assumption that the underlying point process is Poisson, theory exists for Thinning to be applicable in a consistent way ([Vere-Jones 1970] (https://www.jstor.org/stable/2984402)). 
-
-We extend the methodoly to flare occurences in star-planet interactions by identifying mainshocks with intrinsic flares and aftershocks with SPI flares. In contrast to earthquakes, there is no causal structure between intrinsic flares and SPI flares. Nonetheless, the mathematical framework allows for an application lacking the causal structure. We use a variation of the ETAS model ([Ogata 1999] (https://link.springer.com/chapter/10.1007/978-3-0348-8677-2_14)). We propose a combination of a homogenous Poisson process for the intrinsic flares combined with an inhomogeonous Poisson process for the SPI flares. The full model is, hence, an inhomogenous Poisson process. Thinning is than applied to the data based on this process.
 
 
 ## Analysis of results
