@@ -5,7 +5,7 @@ import numpy as np
 from ..psimodel import PSI_Model
 
 def test_init_psimodel():
-    pm = PSI_Model(major_axis_a = None, eccentricity = 0.5, data = np.linspace(0,1,10), model = 'default', n_orbits = 1)
+    pm = PSI_Model(major_axis_a = None, eccentricity = 0.5, data = np.linspace(0,1,10), n_orbits = 1)
     assert len(np.shape(pm.data)) == 1
     assert pm.n_orbits >= 1
     assert pm.eccentricity > 0 and pm.eccentricity < 1

@@ -9,14 +9,14 @@ def test_model_absolute_distance_influence():
     output = model_absolute_distance_influence(time, base, peak, eccentricity)
     assert isinstance(output, float)
     assert output > 0
-    time, base, peak, eccentricity, majors_axis_a = [0.5,2,np.inf,0.7]
+    time, base, peak, eccentricity = [0.5,2,np.inf,0.7]
     with pytest.raises(ValueError):
-        output = model_absolute_distance_influence(time, base, peak, eccentricity, majors_axis_a)
-    assert output == np.inf
-    time, base, peak, eccentricity, majors_axis_a = [0.5,2,3, np.nan]
+        output = model_absolute_distance_influence(time, base, peak, eccentricity)
+    
+    time, base, peak, eccentricity = [0.5,2,3, np.nan]
     with pytest.raises(ValueError):
-        output = model_absolute_distance_influence(time, base, peak, eccentricity, majors_axis_a)
-    assert not np.isnan(output)
+        output = model_absolute_distance_influence(time, base, peak, eccentricity)
+    
     
     
 def test_model_inverse_distance_influence():
@@ -25,14 +25,14 @@ def test_model_inverse_distance_influence():
     output = model_inverse_distance_influence(time, base, peak, eccentricity)
     assert isinstance(output, float)
     assert output > 0
-    time, base, peak, eccentricity, majors_axis_a = [0.5,2,np.inf,0.7]
+    time, base, peak, eccentricity = [0.5,2,np.inf,0.7]
     with pytest.raises(ValueError):
-        output = model_inverse_distance_influence(time, base, peak, eccentricity, majors_axis_a)
-    assert output == np.inf
-    time, base, peak, eccentricity, majors_axis_a = [0.5,2,3, np.nan]
+        output = model_inverse_distance_influence(time, base, peak, eccentricity)
+    
+    time, base, peak, eccentricity = [0.5,2,3, np.nan]
     with pytest.raises(ValueError):
-        output = model_inverse_distance_influence(time, base, peak, eccentricity, majors_axis_a)
-    assert not np.isnan(output)
+        output = model_inverse_distance_influence(time, base, peak, eccentricity)
+    
     
     
 def test_model_absolute_distance_influence_with_maj_axis(): 
@@ -44,11 +44,11 @@ def test_model_absolute_distance_influence_with_maj_axis():
     time, base, peak, eccentricity, majors_axis_a = [0.5,2,np.inf,0.7,1.5]
     with pytest.raises(ValueError):
         output = model_absolute_distance_influence_with_maj_axis(time, base, peak, eccentricity, majors_axis_a)
-    assert output == np.inf
+    
     time, base, peak, eccentricity, majors_axis_a = [0.5,2,3, np.nan,1.5]
     with pytest.raises(ValueError):
         output = model_absolute_distance_influence_with_maj_axis(time, base, peak, eccentricity, majors_axis_a)
-    assert not np.isnan(output)
+  
     
      
     
@@ -61,10 +61,10 @@ def test_model_inverse_distance_influence_with_maj_axis():
     time, base, peak, eccentricity, majors_axis_a = [0.5,2,np.inf,0.7,1.5]
     with pytest.raises(ValueError):
         output = model_inverse_distance_influence_with_maj_axis(time, base, peak, eccentricity, majors_axis_a)
-    assert output == np.inf
+   
     time, base, peak, eccentricity, majors_axis_a = [0.5,2,3, np.nan,1.5]
     with pytest.raises(ValueError):
         output = model_inverse_distance_influence_with_maj_axis(time, base, peak, eccentricity, majors_axis_a)
-    assert not np.isnan(output)
+    
     
 

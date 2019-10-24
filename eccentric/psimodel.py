@@ -10,7 +10,7 @@ import warnings
 import numpy as np
 from scipy.integrate import quad
 from scipy.optimize import minimize 
-import models as mdls
+from .models import *
 
 class PSI_Model():
     '''
@@ -31,10 +31,10 @@ class PSI_Model():
         '''
         
         '''
-        model_dictionary = {'model_absolute_distance_influence' : mdls.model_absolute_distance_influence,
-         'model_inverse_distance_influence' : mdls.model_inverse_distance_influence,
-         'model_absolute_distance_influence_with_maj_axis' : mdls.model_absolute_distance_influence_with_maj_axis,
-         'model_inverse_distance_influence_with_maj_axis' : mdls.model_inverse_distance_influence_with_maj_axis}
+        model_dictionary = {'model_absolute_distance_influence' : model_absolute_distance_influence,
+         'model_inverse_distance_influence' : model_inverse_distance_influence,
+         'model_absolute_distance_influence_with_maj_axis' : model_absolute_distance_influence_with_maj_axis,
+         'model_inverse_distance_influence_with_maj_axis' : model_inverse_distance_influence_with_maj_axis}
         
         if self.model not in ['absolute_distance_influence', 'inverse_distance_influence']:
             raise KeyError('Name not available among models. Use "absolute_distance_influence" or "inverse_distance_influence" instead.')
