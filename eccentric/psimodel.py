@@ -6,8 +6,8 @@ Created on Thu Oct 24 10:57:38 2019
 @author: jens
 """
 
-import numpy as np
 import warnings
+import numpy as np
 from scipy.integrate import quad
 from scipy.optimize import minimize 
 import models as mdls
@@ -17,7 +17,7 @@ class PSI_Model():
     
     '''
     
-    def __init__(self, major_axis_a = None, eccentricity = None, data = None, model = 'default', n_orbits = None):
+    def __init__(self, major_axis_a = None, eccentricity = 0.5, data = None, model = 'absolute_distance_influence', n_orbits = None):
         self.major_axis_a = major_axis_a
         self.eccentricity = eccentricity
         self.n_orbits = n_orbits
