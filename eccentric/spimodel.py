@@ -76,7 +76,7 @@ class SPI_Model():
         # data as 1:n array
         # function depends on time, a, and b, represents intensity
         # data: event times
-        max_likelihood_a, max_likelihood_b = minimize(self.negative_likelihood_function, [1,1], bounds = ((0, None), (0, None)))['x']
+        max_likelihood_a, max_likelihood_b = minimize(self._negative_likelihood_function, [1,1], bounds = ((0, None), (0, None)))['x']
         return max_likelihood_a, max_likelihood_b
 
     def thinning(self):
