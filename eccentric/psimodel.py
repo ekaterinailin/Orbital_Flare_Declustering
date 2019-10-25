@@ -47,9 +47,9 @@ class PSI_Model():
                     return model_dictionary['model_inverse_distance_influence']
             elif self.major_axis_a is not None and self.eccentricity is not None:
                 if self.model == 'absolute_distance_influence':
-                    model_dictionary['model_absolute_distance_influence_with_maj_axis']
+                    return model_dictionary['model_absolute_distance_influence_with_maj_axis']
                 elif self.model == 'inverse_distance_influence':
-                    model_dictionary['model_inverse_distance_influence_with_maj_axis']
+                    return model_dictionary['model_inverse_distance_influence_with_maj_axis']
             else:
                 raise ValueError('At least eccentricity has to be passed to PSI_Model.')
                 

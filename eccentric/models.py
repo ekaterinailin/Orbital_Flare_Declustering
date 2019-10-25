@@ -2,9 +2,9 @@ import numpy as np
 
 def ContainsNaN(func):
     def wrapper(*args, **kawrgs):
-        if np.isnan(func(*args, **kawrgs)):
+        if np.isnan(np.array(func(*args, **kawrgs))).any():
             raise ValueError('NaN-value detected. Check your input parameters.')
-        elif func(*args,**kawrgs) == np.inf:
+        elif np.isinf(np.array(func(*args,**kawrgs))).any():
             raise ValueError('Intensity is infinite. Check your input parameters.')
         return func(*args, **kawrgs)
     return wrapper

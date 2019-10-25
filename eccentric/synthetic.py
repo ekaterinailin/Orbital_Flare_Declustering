@@ -9,12 +9,14 @@ from .helper import find_nearest
 class HotJupiterHost(object):
     """Keep the stellar properties in a
     star class."""
-    def __init__(self, period=None, first_periastron_time=None):
+    def __init__(self, e=0., a=1., period=None, first_periastron_time=None):
         self.period = period
         self.first_periastron_time = first_periastron_time
+        self.eccentricity = e
+        self.major_axis_a = a 
 
     def __repr__(self):
-        return('Hot Jupiter host star, orbital period = {}'.format(self.period))
+        return('Hot Jupiter host star, orbital period = {}, e = {}'.format(self.period, self.eccentricity))
 
 
 class SyntheticFlares(object):
@@ -84,7 +86,18 @@ class SyntheticFlares(object):
         self.generate_intrinsic_flares()
         self.generate_spi_flares(model=model, **kwargs)
         self.merge_spi_and_instrinsic_flares()
-
+        self.stack_flares()
+        
+    def stack_flares(self):
+        """Stack multiple periods onto one another.
+        The flare times are now between 0 and 1, and the 
+        information about during which period they 
+        were observed is lost.
+        """
+        self.all_flares["stacked_peak_time"] = (((self.all_flares.peak_time.values - 
+                                                  self.first_observation_time) % 
+                                                 self.hjhost.period) / 
+                                                 self.hjhost.period)
 
     def generate_intrinsic_flares(self):
         """Produces a Poisson process generated list
