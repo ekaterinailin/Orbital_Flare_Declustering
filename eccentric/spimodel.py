@@ -18,6 +18,9 @@ class SPI_Model():
     '''
     
     def __init__(self, major_axis_a = None, eccentricity = 0.5, data = None, model = 'absolute_distance_influence', n_orbits = None):
+        '''
+        
+        '''
         self.major_axis_a = major_axis_a
         self.eccentricity = eccentricity
         self.n_orbits = n_orbits
@@ -72,7 +75,7 @@ class SPI_Model():
         
         '''
         if self.data is None or len(self.data) == 0:
-            raise ValueError('No input data given. ')
+            raise ValueError('No input data given.')
         # data as 1:n array
         # function depends on time, a, and b, represents intensity
         # data: event times
