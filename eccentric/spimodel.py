@@ -12,7 +12,7 @@ from scipy.integrate import quad
 from scipy.optimize import minimize 
 from .models import *
 
-class PSI_Model():
+class SPI_Model():
     '''
     
     '''
@@ -51,34 +51,45 @@ class PSI_Model():
                 elif self.model == 'inverse_distance_influence':
                     return model_dictionary['model_inverse_distance_influence_with_maj_axis']
             else:
-                raise ValueError('At least eccentricity has to be passed to PSI_Model.')
+                raise ValueError('At least eccentricity has to be passed to SPI_Model.')
                 
+    def _negative_likelihood_function(self, parameters):
+        '''
+        
+        '''
+        if np.nan in parameters:
+            raise ValueError('Negative likelihood function received at least one nan-value but needs two floats.')
+        # use equation sum lambda(x_i) - int lambda(x) dx
+        # negative log likelihood to estimate parameters for a model depending on exactly two parameters
+        parameter_a, parameter_b = parameters
+        model = self.intensity_function()
+        data_depending_term = -np.log(model(self.data, parameter_a, parameter_b, self.eccentricity, self.major_axis_a)).sum()
+        compensator = self.n_orbits*quad(lambda x: model(x, parameter_a, parameter_b, self.eccentricity, self.major_axis_a),0,1)[0]
+        return data_depending_term + compensator
+        
     def estimate_two_parameters(self):
         '''
         
         '''
+        if self.data is None or len(self.data) == 0:
+            raise ValueError('No input data given. ')
         # data as 1:n array
         # function depends on time, a, and b, represents intensity
         # data: event times
-        def negative_likelihood_function(parameters): # use equation sum lambda(x_i) - int lambda(x) dx
-            # negative log likelihood to estimate parameters for a model depending on exactly two parameters
-            parameter_a, parameter_b = parameters
-            model = self.intensity_function()
-            data_depending_term = -np.log(model(self.data, parameter_a, parameter_b, self.eccentricity, self.major_axis_a)).sum()
-            compensator = self.n_orbits*quad(lambda x: model(x, parameter_a, parameter_b, self.eccentricity, self.major_axis_a),0,1)[0]
-            return data_depending_term + compensator
-        max_likelihood_a, max_likelihood_b = minimize(negative_likelihood_function, [1,1], bounds = ((0, None), (0, None)))['x']
+        max_likelihood_a, max_likelihood_b = minimize(self.negative_likelihood_function, [1,1], bounds = ((0, None), (0, None)))['x']
         return max_likelihood_a, max_likelihood_b
 
     def thinning(self):
         '''
         
         '''
+        model = self.intensity_function()
         if self.MLE_params == None:
             self.MLE_params  = self.estimate_two_parameters()
         for event in self.data:
             u = np.random.rand()
-            if u < (self.intensity_function(event, self.MLE_params[0], self.MLE_params[1]) - self.MLE_params[0]) / self.intensity_function(event, self.MLE_params[0], self.MLE_params[1]):
+            if u < (model(event, self.MLE_params[0], self.MLE_params[1],self.eccentricity, self.major_axis_a) - 
+                    self.MLE_params[0]) / model(event, self.MLE_params[0], self.MLE_params[1], self.eccentricity, self.major_axis_a):
                 self.inhom.append(event)
             else:
                 self.hom.append(event)
