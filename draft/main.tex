@@ -4,7 +4,7 @@
 %                                                       (c) EDP Sciences
 %-----------------------------------------------------------------------
 %
-%\documentclass[referee]{aa} % for a referee version
+\documentclass[referee]{aa} % for a referee version
 %\documentclass[onecolumn]{aa} % for a paper on 1 column  
 %\documentclass[longauth]{aa} % for the long lists of affiliations 
 %\documentclass[letter]{aa} % for the letters 
@@ -12,13 +12,14 @@
 %                              according to the author-year natbib style
 
 %
-\documentclass{aa}  
+%\documentclass{aa}  
 
 %
 \usepackage{graphicx}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{txfonts}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{pythontex}
 %\usepackage[options]{hyperref}
 % To add links in your PDF file, use the package "hyperref"
 % with options according to your LaTeX or PDFLaTeX drivers.
@@ -63,19 +64,17 @@
   % results heading (mandatory)
    {Results}
   % conclusions heading (optional), leave it empty if necessary 
-   {}
+   {Conclusion}
 
    \keywords{ --%add from A&A list
-                 --
-                
-               }
+                 --}
 
    \maketitle
 %
 %-------------------------------------------------------------------
 
 \section{Introduction}
-What are Star-Planet interactions?
+What are Star-Planet interactions? Evidence in eccentric system~\citep{maggio2015}. 
 What is, broadly speaking, Thinning?
 
 
@@ -102,6 +101,7 @@ Is  this path worth pursuing or did we hit a wall?
       Part of this work was supported by BLA.
 \end{acknowledgements}
 
-\bibliographystyle{aa} % style aa.bst
+\bibliographystyle{bibtex/aa} % style aa.bst
 \bibliography{library} % your references Yourfile.bib
 
+\end{document}
